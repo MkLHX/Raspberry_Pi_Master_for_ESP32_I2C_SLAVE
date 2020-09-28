@@ -20,3 +20,7 @@ To use these classes you must need to install:
 Follow examples to read data from master RPI to slave ESP32:<br>
 [example-read](/example/raspberry_pi_read_esp32.py)<br>
 [example-write](/example/raspberry_pi_write_esp32.py)
+
+
+to install it use pip:
+>pip install raspberrypi-esp32-i2c
