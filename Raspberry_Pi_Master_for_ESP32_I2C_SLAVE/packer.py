@@ -1,5 +1,5 @@
 """
-@file packer.py
+@file Packer.py
 @author Mickael Lehoux <https://github.com/MkLHX>
 @brief Class to allow raspberry I2C Master to deal with ESP32
 using ESP32 Slave I2C library
@@ -31,12 +31,18 @@ class Packer:
     )
 
     def __init__(self):
-        self._frame_start = 0x02
-        self._frame_end = 0x04
+        self._debug = False
         self._buffer = [0] * self.PACKER_BUFFER_LENGTH
         self._index = 0
-        self._is_written = False
         self.reset()
+
+    @property
+    def debug(self):
+        return self._debug
+
+    @debug.setter
+    def debug(self, d):
+        self._debug = d
 
     def __enter__(self):
         """Context manager enter function."""
@@ -49,6 +55,10 @@ class Packer:
         """Context manager exit function, ensures resources are cleaned up."""
         self.reset()
         return False  # Don't suppress exceptions.
+
+    def __del__(self):
+        """Clean up any resources instance."""
+        return False
 
     def read(self):
         """
@@ -63,7 +73,13 @@ class Packer:
         return self._buffer
 
     def write(self, data: int):
-        if self._is_written:
+        """
+        @brief write data in prepared buffer
+        @param int data
+        """
+        if self._debug:
+            print("Data to unpack: ", data)
+        if self._is_written:  # allow write after .end()
             self._is_written = False
         self._buffer[self._index] = data
         self._index += 1
@@ -93,5 +109,8 @@ class Packer:
         """
         @brief Reset the packing process.
         """
+        self._frame_start = 0x02
+        self._frame_end = 0x04
         self._buffer[0] = self._frame_start
         self._index = 2  # keep field for total lenght on index 1
+        self._is_written = False

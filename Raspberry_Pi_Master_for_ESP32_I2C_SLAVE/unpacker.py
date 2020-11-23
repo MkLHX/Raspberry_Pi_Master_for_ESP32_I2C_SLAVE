@@ -1,5 +1,5 @@
 """
-@file unpacker.py
+@file Unpacker.py
 @author Mickael Lehoux <https://github.com/MkLHX>
 @brief Class to allow raspberry I2C Master to deal with ESP32
 using ESP32 Slave I2C library
@@ -40,7 +40,31 @@ class Unpacker:
     }
 
     def __init__(self):
+        self._debug = False
         self.reset()
+
+    @property
+    def debug(self):
+        return self._debug
+
+    @debug.setter
+    def debug(self, d):
+        self._debug = d
+
+    def __enter__(self):
+        """Context manager enter function."""
+        # Just return this object so it can be used in a with statement, like
+        # with Unpacker() as unpacker:
+        #     # do stuff!
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit function, ensures resources are cleaned up."""
+        return False  # Don't suppress exceptions.
+
+    def __del__(self):
+        """Clean up any resources instance."""
+        return False
 
     def get_last_error(self):
         """
@@ -48,17 +72,6 @@ class Unpacker:
         @return list [error_code, error_text]
         """
         return self._last_error, self.error_decodes[self._last_error]
-
-    def __enter__(self):
-        """Context manager enter function."""
-        # Just return this object so it can be used in a with statement, like
-        # with Packer() as packer:
-        #     # do stuff!
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """Context manager exit function, ensures resources are cleaned up."""
-        return False  # Don't suppress exceptions.
 
     def read(self):
         """
@@ -73,6 +86,8 @@ class Unpacker:
         check if start, end and crc8 bytes are correct
         remove start, length, crc8 and end bytes
         """
+        if self._debug:
+            print("Data to unpack: ", data)
         if data[0] != self._frame_start:
             self._last_error = self.error_codes["INVALID_START"]
             raise Exception("ERROR: Unpacker invalid start byte")

@@ -20,11 +20,12 @@ def read_from_rpi_to_esp32():
             smbus.write_bytes(register, bytearray(packer.read()))
         time.sleep(0.3)  # wait i2c process the request
         raw_read = smbus.read_bytes(register, 5)
-        print(list(raw_read))  # the raw read contains the data format first, length, data, crc8, end bytes
+        raw_list = list(raw_read)
+        print(raw_list)  # the raw read contains the data format first, length, data, crc8, end bytes
 
         # let's clean the data
         with Unpacker as unpacker:
-            unpacker.write(raw_read)
+            unpacker.write(raw_list)
             read = unpacker.read()
         return read
     except Exception as e:

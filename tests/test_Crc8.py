@@ -2,6 +2,7 @@
 # testing in general, but rather to support the `find_packages` example in
 # setup.py that excludes installing the "tests" package
 
+import sys
 import unittest
 from Raspberry_Pi_Master_for_ESP32_I2C_SLAVE.crc8 import Crc8
 

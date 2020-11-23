@@ -9,7 +9,7 @@ register = 0x01  # register to write is 0x01
 value = 0x04
 
 
-def read_from_rpi_to_esp32():
+def write_from_rpi_to_esp32():
     try:
         # prepare the data
         with Packer() as packer:

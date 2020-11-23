@@ -1,5 +1,5 @@
 """
-@file crc8.py
+@file Crc8.py
 @author Mickael Lehoux <https://github.com/MkLHX>
 @brief build CRC8 in python
 @date 2020-09-18
