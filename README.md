@@ -1,5 +1,5 @@
 # Raspberry_Pi_Master_for_ESP32_I2C_SLAVE
-## use <u><b>Raspberry pi as MASTER</b></u> of a <u><b>ESP32 SLAVE</b></u> on <u><b>i2c bus</b></u>
+## use __**Raspberry pi as MASTER**__ of a __**ESP32 SLAVE**__ on __**i2c bus**__
 
 ### To use ESP32 as slave on i2c bus you have to use ESP32_I2C_Slave c++ library:
 > platformio lib_deps = ESP32 I2C Slave
