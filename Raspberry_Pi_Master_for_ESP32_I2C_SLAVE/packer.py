@@ -68,7 +68,7 @@ class Packer:
         """
         if not self._is_written:
             raise Exception(
-                "You need to finish process by using .end() method before read buffer"
+                "You need to finish process by using packer.end() method before read buffer"
             )
         return self._buffer
 
