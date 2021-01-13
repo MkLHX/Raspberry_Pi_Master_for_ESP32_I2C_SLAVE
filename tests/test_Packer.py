@@ -9,10 +9,11 @@ from Raspberry_Pi_Master_for_ESP32_I2C_SLAVE.packer import Packer
 
 class TestPacker(unittest.TestCase):
     def test_packer(self):
-        packer = Packer()
-        packer.write(127)
-        packer.end()
-        packed = [i for i in packer.read() if i != 0]
+        packed = None
+        with Packer() as packer:
+            packer.write(127)
+            packer.end()
+            packed = [i for i in packer.read() if i != 0]
         expected = [2, 5, 127, 185, 4]
         self.assertIsNotNone(packed)
         self.assertTrue(type(packed).__name__ == "list")

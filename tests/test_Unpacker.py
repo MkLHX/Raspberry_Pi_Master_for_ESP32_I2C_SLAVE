@@ -10,9 +10,10 @@ from Raspberry_Pi_Master_for_ESP32_I2C_SLAVE.unpacker import Unpacker
 class TestPacker(unittest.TestCase):
     def test_unpacker(self):
         value_to_unpack = [2, 6, 12, 1, 19, 4]
-        unpacker = Unpacker()
-        unpacker.write(value_to_unpack)
-        unpacked = unpacker.read()
+        unpacked = None
+        with Unpacker() as unpacker:
+            unpacker.write(value_to_unpack)
+            unpacked = unpacker.read()
         expected = [12, 1]
         self.assertIsNotNone(unpacked)
         self.assertTrue(type(unpacked).__name__ == "list")
