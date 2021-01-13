@@ -10,7 +10,7 @@ URL = "https://github.com/MkLHX/Raspberry_Pi_Master_for_ESP32_I2C_SLAVE"
 EMAIL = "mickael@lehoux.net"
 AUTHOR = "Mickael Lehoux"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
