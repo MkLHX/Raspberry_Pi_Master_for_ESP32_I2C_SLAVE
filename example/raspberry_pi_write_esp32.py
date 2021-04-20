@@ -11,6 +11,7 @@ value = 0x04
 
 def write_from_rpi_to_esp32():
     try:
+        smbus = SMBus(1)
         # prepare the data
         packed = None
         with Packer() as packer:
@@ -19,7 +20,6 @@ def write_from_rpi_to_esp32():
             packer.end()
             packed = packer.read()
         # change 1 of SMBus(1) to bus number on your RPI
-        with SMBus(1) as smbus:
-            smbus.write_bytes(register, bytearray(packed))
+        smbus.write_bytes(register, bytearray(packed))
     except Exception as e:
         print("ERROR: {}".format(e))
