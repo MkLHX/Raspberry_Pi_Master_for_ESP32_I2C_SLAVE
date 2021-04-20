@@ -10,6 +10,7 @@ register = 0x01  # register to read is 0x01
 
 def read_from_rpi_to_esp32():
     try:
+        # change 1 of SMBus(1) to bus number on your RPI
         smbus = SMBus(1)
         # prepare the data
         packed = None
@@ -18,7 +19,6 @@ def read_from_rpi_to_esp32():
             packer.end()
             packed = packer.read()
 
-        # change 1 of SMBus(1) to bus number on your RPI
         raw_list = None
         smbus.write_bytes(register, bytearray(packed))
         time.sleep(0.3)  # wait i2c process the request
