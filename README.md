@@ -1,4 +1,6 @@
 # Raspberry_Pi_Master_for_ESP32_I2C_SLAVE
+# This Python lib only works with the v0.2.0 of the c++ library https://github.com/gutierrezps/ESP32_I2C_Slave/releases/tag/v0.2.0
+
 ## use __**Raspberry pi as MASTER**__ of a __**ESP32 SLAVE**__ on __**i2c bus**__
 
 ### To use ESP32 as slave on i2c bus you have to use ESP32_I2C_Slave c++ library:
